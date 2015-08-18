@@ -21,12 +21,12 @@ In the 2014's TV
 # Project Structure
 ```
     ./
-     |-src/
-     |  |-cordova.js ........ common Cordova stuff
-     |  |-common/ ........... base modules shared across platfoms
-     |-tasks/ ............... custom grunt tasks
-     |-tests/ ............... unit tests
-     '-pkg/ ................. generated platform cordova.js files
+     |-cordova-js-src/ ...... cordova-js orsay platform implementation
+     |  |-exec.js ........... cordova/exec module
+     |  |-platform.js ....... cordova/platform module having platform definition and bootstrap
+     |  |-plugin/ ........... cordova plugin implementations
+     |-package.json ......... NPM package configuration
+     '-README.md ............ this file
 ```
 
 # How to Build
