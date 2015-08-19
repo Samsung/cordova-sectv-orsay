@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+	<ThumbIcon>icon/default_106.png</ThumbIcon>
+	<BigThumbIcon>icon/default_115.png</BigThumbIcon>
+	<ListIcon>icon/default_85.png</ListIcon>
+	<BigListIcon>icon/default_95.png</BigListIcon>
+
+	<category>{{category}}</category>
+	<autoUpdate>y</autoUpdate>
+
+	<ver>{{version}}</ver>
+	
+	<fullwidget>y</fullwidget>
+	<srcctl>y</srcctl>
+	<ticker>n</ticker>
+	<childlock>n</childlock>
+	<audiomute>n</audiomute>
+	<videomute>n</videomute>
+	<dcont>y</dcont>
+	<movie>n</movie>
+
+	<widgetname>{{name}}</widgetname>
+	<description>{{& description}}</description>
+
+	<mouse>y</mouse>
+	
+	<width>{{resWidth}}</width>
+	<height>{{resHeight}}</height>
+
+	<author>
+		<name>{{& authorName}}</name>
+		<email>{{& authorEmail}}</email>
+		<link>{{& authorHref}}</link>
+		<organization>{{authorOrganization}}</organization>
+	</author>
+</widget>
