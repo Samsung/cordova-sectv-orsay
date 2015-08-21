@@ -24,6 +24,7 @@ module.exports = {
     cordovaVersion: '3.4.0',
 
     bootstrap: function() {
+        console.log("cordova/platform: orsay bootstrap BEGIN");
 
         var modulemapper = require('cordova/modulemapper');
         var channel = require('cordova/channel');
@@ -47,7 +48,7 @@ module.exports = {
         window.onResume = function () {
             channel.onResume.fire();
         };
-        document.addEventListener('load', function () {
+        window.addEventListener('load', function () {
             window.onShow = function () {
                 channel.onDeviceReady.fire();
             };
@@ -57,5 +58,6 @@ module.exports = {
         });
 
     // End of bootstrap
+        console.log("cordova/platform: orsay bootstrap END");
     }
 };
