@@ -22,6 +22,13 @@
 
 //------------------------------------------------------------------------------
 
+//var logger = require("./logger");
+// kookheon.kim: Modified from original to be absolute module id.
+// The cordova module's separator is "/" and cordova plugin's separator is ".".
+// When a plugin requests a module to "require" with relative path, the "require" find and reassemble the requested id with dot(.) Separator.
+// In the sectv-orsay and sectv-tizen, all the cordova plugin implementation is merged to cordova.js. This is done by cordova-js and plugin modules are merged with "/" separator instead of ".".
+// This makes error because the "require" searches the "." separator from the plugin module's id to make the absolute path.
+// To use absolute id will suppress this error.
 var logger = require("cordova/plugin/logger");
 var utils  = require("cordova/utils");
 
