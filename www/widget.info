@@ -1,2 +1,10 @@
-Use Alpha Blending? = Yes
+# Set Application Position, Size on screen
+Application Position = 0,0
+Application Size = {{resWidth}}x{{resHeight}}
+
+# Screen Setting
+Screen Number = 1
 Screen Resolution = {{resWidth}}x{{resHeight}}
+
+# Alpha Blending Setting
+Use Alpha Blending? = Yes
