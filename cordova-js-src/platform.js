@@ -28,6 +28,7 @@ module.exports = {
 
         var modulemapper = require('cordova/modulemapper');
         var channel = require('cordova/channel');
+        var SEF = require('cordova/plugin/SEF');
 
         modulemapper.clobbers('cordova/exec/proxy', 'cordova.commandProxy');
 
@@ -58,30 +59,26 @@ module.exports = {
         window.addEventListener('load', function () {
             window.onShow = function () {
                 var retval = null;
-                var body = document.getElementsByTagName('body')[0];
-                var objectElem = '<OBJECT id="SEFObject" classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
-                body.innerHTML += objectElem;
-                var SEFObject = document.getElementById('SEFObject');
-                retval = SEFObject.Open('AppCommon','1.000','AppCommon');
-                console.log('SEF AppCommon Open.......'+retval);
-                //모든 키 해제 후 4-way navigation / enter / return key 만 등록
-                SEFObject.Execute('UnregisterAllKey');
-                SEFObject.Execute('RegisterKey',29460); //up
-                SEFObject.Execute('RegisterKey',29461); //down
-                SEFObject.Execute('RegisterKey',4); //left
-                SEFObject.Execute('RegisterKey',5); //right
-                SEFObject.Execute('RegisterKey',29443); //enter
-                SEFObject.Execute('RegisterKey',88); // return
-                retval = SEFObject.Close();
-                console.log('SEF AppCommon close.......'+retval);
+                try {
+                    var AppCommonPlugin = SEF.get('AppCommon');
+                } catch(e){
+                    console.log('error....................'+e);
+                }
+                AppCommonPlugin.Execute('UnregisterAllKey');
+                AppCommonPlugin.Execute('RegisterKey',29460); //up
+                AppCommonPlugin.Execute('RegisterKey',29461); //down
+                AppCommonPlugin.Execute('RegisterKey',4); //left
+                AppCommonPlugin.Execute('RegisterKey',5); //right
+                AppCommonPlugin.Execute('RegisterKey',29443); //enter
+                AppCommonPlugin.Execute('RegisterKey',88); // return
 
-                retval = SEFObject.Open('NNavi','1.000','NNavi');
-                console.log('SEF NNavi Open.......'+retval);
-                // volume / channel banner 보이도록 설정.
-                SEFObject.Execute('SetBannerState',2);
-                retval = SEFObject.Close();
-                console.log('SEF NNavi close.......'+retval);
+                 try {
+                    var NNaviPlugin = SEF.get('NNavi');
+                } catch(e){
+                    console.log('error....................'+e);
+                }
 
+                NNaviPlugin.Execute('SetBannerState',2);
                 channel.onDeviceReady.fire();
             };
             if(window.curWidget && typeof curWidget.setPreference == 'function') {
