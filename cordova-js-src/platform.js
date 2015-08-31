@@ -79,12 +79,17 @@ module.exports = {
                 }
 
                 NNaviPlugin.Execute('SetBannerState',2);
+                SEF.close();
                 channel.onDeviceReady.fire();
             };
             if(window.curWidget && typeof curWidget.setPreference == 'function') {
                 curWidget.setPreference('ready', 'true');
             }
         });
+
+        window.addEventListener('unload', function () {
+            SEF.close();
+        })
 
     // End of bootstrap
         console.log("cordova/platform: orsay bootstrap END");
