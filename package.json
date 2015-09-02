@@ -2,5 +2,10 @@
   "name": "cordova-sectv-orsay",
   "version": "1.0.0",
   "description": "Cordova library for supporting Legacy Samsung Smart TV Platform.",
-  "author": "Samsung Electronics"
+  "author": "Samsung Electronics",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.2"
+  }
 }
