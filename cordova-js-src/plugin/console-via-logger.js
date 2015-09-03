@@ -30,12 +30,14 @@
 // This makes error because the "require" searches the "." separator from the plugin module's id to make the absolute path.
 // To use absolute id will suppress this error.
 var logger = require("cordova/plugin/logger");
+/* jshint -W098 */
 var utils  = require("cordova/utils");
 
 //------------------------------------------------------------------------------
 // object that we're exporting
 //------------------------------------------------------------------------------
-var console = module.exports;
+/* jshint -W079 */
+var console = module.exports; 
 
 //------------------------------------------------------------------------------
 // copy of the original console object

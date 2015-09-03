@@ -47,7 +47,7 @@ module.exports = {
         script.src = '$MANAGER_WIDGET/Common/webapi/1.0/webapis.js';
         script.onload = function() {
             channel.onNativeReady.fire();
-        }
+        };
         head.appendChild(script);
 
         window.onPause = function () {
@@ -57,10 +57,11 @@ module.exports = {
             channel.onResume.fire();
         };
         window.addEventListener('load', function () {
+            var AppCommonPlugin  = null;
+            var NNaviPlugin = null;
             window.onShow = function () {
-                var retval = null;
                 try {
-                    var AppCommonPlugin = SEF.get('AppCommon');
+                    AppCommonPlugin = SEF.get('AppCommon');
                 } catch(e){
                     console.log('error....................'+e);
                 }
@@ -73,7 +74,7 @@ module.exports = {
                 AppCommonPlugin.Execute('RegisterKey',88); // return
 
                  try {
-                    var NNaviPlugin = SEF.get('NNavi');
+                    NNaviPlugin = SEF.get('NNavi');
                 } catch(e){
                     console.log('error....................'+e);
                 }
@@ -82,14 +83,14 @@ module.exports = {
                 SEF.close();
                 channel.onDeviceReady.fire();
             };
-            if(window.curWidget && typeof curWidget.setPreference == 'function') {
-                curWidget.setPreference('ready', 'true');
+            if(window.curWidget && typeof window.curWidget.setPreference == 'function') {
+                window.curWidget.setPreference('ready', 'true');
             }
         });
 
         window.addEventListener('unload', function () {
             SEF.close();
-        })
+        });
 
     // End of bootstrap
         console.log("cordova/platform: orsay bootstrap END");

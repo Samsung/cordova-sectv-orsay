@@ -44,6 +44,7 @@
 var logger = exports;
 
 var exec    = require('cordova/exec');
+/* jshint -W098 */
 var utils   = require('cordova/utils');
 
 var UseConsole   = false;
