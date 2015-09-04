@@ -3,7 +3,7 @@ var orsay = require('cordova/platform');
 module.exports = {
     getDeviceInfo: function(success, error) {
         try {
-            setTimeout(function{
+            setTimeout(function(){
                 success({
                     cordova: orsay.cordovaVersion,
                     platform: 'sectv-orsay',
@@ -14,7 +14,7 @@ module.exports = {
                 });
             },0);
         } catch (e) {
-            setTimeout(function{
+            setTimeout(function(){
                 error (e);
             },0);
         }
