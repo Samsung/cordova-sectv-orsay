@@ -18,15 +18,21 @@ module.exports = {
                         } else {
                             networkType = Connection.UNKNOWN;
                         }
-                        successCallback(networkType);
+                        setTimeout(function(){
+                            successCallback(networkType);
+                        },0);
                     }
                 }
             },function(){
                 networkType = Connection.NONE;
-                successCallback(networkType);
+                setTimeout(function(){
+                    successCallback(networkType);
+                },0);
             });
         } catch (e) {
-            errorCallback(e);
+            setTimeout(function(){
+                errorCallback(e);
+            },0);
         }
         
     }
