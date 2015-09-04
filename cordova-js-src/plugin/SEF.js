@@ -27,20 +27,22 @@ SEF.prototype.get = function(name) {
         if(this.currentPlugin.Open(name,'1.000',name) === 1) {
             return this.currentPlugin;
         } else {
-            console.log('fail to SEF Plugin open');
-            throw 'fail to SEF Plugin open';
+            console.log('Failed to open SEF Plugin');
+            throw Error('Failed to open SEF Plugin');
         }
     } else {
-        console.log('this SEF Plugin is not supported');
-        throw 'this SEF Plugin is not supported';
+        console.log('This SEF Plugin name is not supported');
+        throw Error('This SEF Plugin name is not supported');
     }
 };
 
 SEF.prototype.close = function() {
+    
     if(this.currentPlugin) {
         this.currentPlugin.Close();
     } else {
-        console.log('this SEF Plugin is NULL');
+        console.log('Failed to close SEF Plugin');
+        throw Error('Failed to close SEF Plugin');
     }
 };
 

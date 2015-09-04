@@ -63,7 +63,7 @@ module.exports = {
                 try {
                     AppCommonPlugin = SEF.get('AppCommon');
                 } catch(e){
-                    console.log('error....................'+e);
+                    Error(e);
                 }
                 AppCommonPlugin.Execute('UnregisterAllKey');
                 AppCommonPlugin.Execute('RegisterKey',29460); //up
@@ -76,7 +76,7 @@ module.exports = {
                  try {
                     NNaviPlugin = SEF.get('NNavi');
                 } catch(e){
-                    console.log('error....................'+e);
+                    Error(e);
                 }
 
                 NNaviPlugin.Execute('SetBannerState',2);
