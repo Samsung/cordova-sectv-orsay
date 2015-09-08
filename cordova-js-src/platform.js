@@ -99,7 +99,7 @@ module.exports = {
                     // Calling "setPreference('return', 'true')" is needed explicitly to exit the application
                     e.preventDefault();
                     break;
-                case 45  // EXIT key
+                case 45:  // EXIT key
                     // NOTHING to prevent.
                     break;
             }
