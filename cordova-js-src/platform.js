@@ -92,6 +92,19 @@ module.exports = {
             SEF.close();
         });
 
+        window.addEventListener('keydown', function (e) {
+            switch(e.keyCode) {
+                case 88:  // RETURN key
+                    // default action disabled.
+                    // Calling "setPreference('return', 'true')" is needed explicitly to exit the application
+                    e.preventDefault();
+                    break;
+                case 45  // EXIT key
+                    // NOTHING to prevent.
+                    break;
+            }
+        });
+
     // End of bootstrap
         console.log("cordova/platform: orsay bootstrap END");
     }
