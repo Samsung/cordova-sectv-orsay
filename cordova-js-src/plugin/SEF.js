@@ -13,9 +13,10 @@ SEF.prototype.get = function(name) {
         if(!this.insertPluginList.hasOwnProperty(name)) {
             var body = document.getElementsByTagName('body')[0];
             body.innerHTML += '<OBJECT id="'+ pluginPrefix + name + '" classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
-        } 
+        }
+        
         var currentPlugin = document.getElementById(pluginPrefix + name);
-
+        currentPlugin.Close();
         if(currentPlugin.Open(name,'1.000',name) === 1) {
             this.insertPluginList.name = currentPlugin;
             return currentPlugin;
