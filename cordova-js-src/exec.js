@@ -34,10 +34,9 @@ module.exports = function(success, fail, service, action, args) {
         }
 
         try {
-            return proxy(success, fail, args);
+            proxy(success, fail, args);
         }
         catch(e) {
-            // TODO throw maybe?
             var msg = "Exception calling :: " + service + " :: " + action  + " ::exception=" + e;
             console.log(msg);
         }
