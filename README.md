@@ -64,17 +64,5 @@ In the 2014's TV
 
 * We recommand to use the "grunt-cordova-sectv" task for these process.
 
-# Project Structure
-```
-    ./
-     |-cordova-js-src/ ...... cordova-js sectv-orsay platform implementation
-     |  |-plugin/ ........... cordova plugin implementations
-     |  |-exec.js ........... cordova/exec module
-     |  `-platform.js ....... cordova/platform module having platform definition and bootstrap
-     |-www/ ................. Project template for Orsay platform
-     |-package.json ......... NPM package configuration
-     '-README.md ............ this file
-```
-
 # Known Issues
 Not yet
