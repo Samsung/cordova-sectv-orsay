@@ -45,7 +45,7 @@ $ cp ./pkg/cordova.sectv-orsay.js ../cordova-sectv-orsay/www/cordova.js
 
 # How to use
 In the 2014's TV
-1. Copy the `www` directory from your Cordova app to a directory for new orsay project.
+1. Copy the `www` directory's content from your Cordova app to a directory for new orsay project.
 2. Create the Orsay's config.xml in the project.
 3. Copy the built `cordova-js/pkg/cordova.sectv-orsay.js` or `www/cordova.js` to your cordova `www` directory root with name `cordova.js`.
 4. Zip the project directory to package.
