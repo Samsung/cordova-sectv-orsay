@@ -1,14 +1,13 @@
-function SEF() {
-   this.pluginName = ['TV', 'TVMW', 'NNavi', 'Audio', 'AppCommon', 'FrontPanel', 'ImageViewer', 'Player', 'AUI',
+var SEF = {
+   pluginName : ['TV', 'TVMW', 'NNavi', 'Audio', 'AppCommon', 'FrontPanel', 'ImageViewer', 'Player', 'AUI',
                      'Storage', 'Network', 'Download', 'Screen', 'Time', 'Video', 'Window',
                      'ExternalWidgetInterface', 'FileSystem', 'Gamepad', 'Michrophone',
-                     'CustomDevice', 'MIDIDevice','RECOG', 'AllShare'];
-   
-   this.insertPluginList = {};
-}
+                     'CustomDevice', 'MIDIDevice','RECOG', 'AllShare'],
+   insertPluginList : {}
+};
 
 var pluginPrefix = 'cordova_plugin_SEF_';
-SEF.prototype.get = function(name) {
+SEF.get = function(name) {
     if(__checkPluginName.apply(this,arguments)){
         if(!this.insertPluginList.hasOwnProperty(name)) {
             var body = document.getElementsByTagName('body')[0];
@@ -18,7 +17,7 @@ SEF.prototype.get = function(name) {
         var currentPlugin = document.getElementById(pluginPrefix + name);
         currentPlugin.Close();
         if(currentPlugin.Open(name,'1.000',name) === 1) {
-            this.insertPluginList.name = currentPlugin;
+            this.insertPluginList[name] = currentPlugin;
             return currentPlugin;
         } 
         else {
@@ -32,18 +31,20 @@ SEF.prototype.get = function(name) {
     }
 };
 
-SEF.prototype.close = function(name) {
+SEF.close = function(name) {
+    var plugin = null;
     if(!name){
         for(var key in this.insertPluginList){
-            this.insertPluginList[key].Close();
+            plugin = document.getElementById(this.insertPluginList[key].id);
+            plugin.Close();
             delete this.insertPluginList[key];
         }
     }
     else if(name && this.insertPluginList.hasOwnProperty(name)) {
-        this.insertPluginList.name.Close();
-        delete this.insertPluginList.name;
-    } 
-
+        plugin = document.getElementById(this.insertPluginList[name].id);
+        plugin.Close();
+        delete this.insertPluginList[name];
+    }
 };
 
 function __checkPluginName(name){
@@ -56,4 +57,4 @@ function __checkPluginName(name){
     return null;
 }
 
-module.exports = new SEF();
+module.exports = SEF;
