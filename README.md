@@ -5,6 +5,18 @@ Cordova based applications are, at the core, applications written with web techn
 # Supported Platform
 * 2014's Samsung Smart TV
 
+# Project Structure
+```
+    ./
+     |-cordova-js-src/ ...... cordova-js sectv-orsay platform implementation
+     |  |-plugin/ ........... cordova plugin implementations
+     |  |-exec.js ........... cordova/exec module
+     |  `-platform.js ....... cordova/platform module having platform definition and bootstrap
+     |-www/ ................. Project template for Orsay platform
+     |-package.json ......... NPM package configuration
+     '-README.md ............ this file
+```
+
 # How to Build
 * Please see [Cordova-js](http://github.com/apache/cordova-js) for more detail.
 * Clone the [Cordova-js](http://github.com/apache/cordova-js) project as sibling of this project.
