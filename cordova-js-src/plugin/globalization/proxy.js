@@ -25,7 +25,7 @@ module.exports = {
             success && setTimeout(function () {
                 success({
                     value: appParams.lang
-                })
+                });
             }, 0);
         }
         else {
@@ -42,7 +42,7 @@ module.exports = {
             success && setTimeout(function () {
                 success({
                     value: appParams.country
-                })
+                });
             }, 0);
         }
         else {
