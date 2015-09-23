@@ -73,14 +73,13 @@ module.exports = {
                 AppCommonPlugin.Execute('RegisterKey',29443); //enter
                 AppCommonPlugin.Execute('RegisterKey',88); // return
 
-                 try {
+                try {
                     NNaviPlugin = SEF.get('NNavi');
                 } catch(e){
                     Error(e);
                 }
 
                 NNaviPlugin.Execute('SetBannerState',2);
-                SEF.close();
                 channel.onDeviceReady.fire();
             };
             if(window.curWidget && typeof window.curWidget.setPreference == 'function') {

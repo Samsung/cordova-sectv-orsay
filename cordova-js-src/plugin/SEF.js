@@ -10,8 +10,12 @@ var pluginPrefix = 'cordova_plugin_SEF_';
 SEF.get = function(name) {
     if(__checkPluginName.apply(this,arguments)){
         if(!this.insertPluginList.hasOwnProperty(name)) {
-            var body = document.getElementsByTagName('body')[0];
-            body.innerHTML += '<OBJECT id="'+ pluginPrefix + name + '" classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
+            var containerDiv = document.createElement('div');
+            containerDiv.style.position = 'absolute';
+            containerDiv.style.left = '0px';
+            containerDiv.style.top = '0px';
+            document.body.appendChild(containerDiv);
+            containerDiv.innerHTML += '<OBJECT id="'+ pluginPrefix + name + '" classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
         }
         
         var currentPlugin = document.getElementById(pluginPrefix + name);
