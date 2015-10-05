@@ -29,8 +29,16 @@ module.exports = {
         var modulemapper = require('cordova/modulemapper');
         var channel = require('cordova/channel');
         var SEF = require('cordova/plugin/SEF');
+        var isWebapisLoaded = false;
+        var isOnShowEventFire = false;
 
         modulemapper.clobbers('cordova/exec/proxy', 'cordova.commandProxy');
+
+        var fireNativeReadyEvent = function() {
+            if(isWebapisLoaded && isOnShowEventFire){
+                channel.onNativeReady.fire();
+            }
+        };
 
         for (var k in define.moduleMap) {
             if (/cordova.*\/proxy/.exec(k)) {
@@ -46,7 +54,8 @@ module.exports = {
         script.type = 'text/javascript';
         script.src = '$MANAGER_WIDGET/Common/webapi/1.0/webapis.js';
         script.onload = function() {
-            channel.onNativeReady.fire();
+            isWebapisLoaded = true;
+            fireNativeReadyEvent();
         };
         head.appendChild(script);
 
@@ -80,7 +89,8 @@ module.exports = {
                 }
 
                 NNaviPlugin.Execute('SetBannerState',2);
-                channel.onDeviceReady.fire();
+                isOnShowEventFire = true;
+                fireNativeReadyEvent();
             };
             if(window.curWidget && typeof window.curWidget.setPreference == 'function') {
                 window.curWidget.setPreference('ready', 'true');
