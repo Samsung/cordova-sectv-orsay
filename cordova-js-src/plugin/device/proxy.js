@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var orsay = require('cordova/platform');
 
 module.exports = {

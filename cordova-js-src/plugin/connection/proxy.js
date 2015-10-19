@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var Connection = require('cordova/plugin/Connection');
 var OrsayActiveConnectionType = {
     WIFI : 0,

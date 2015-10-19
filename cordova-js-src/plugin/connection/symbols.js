@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-'use strict';
-
+ 
 var modulemapper = require('cordova/modulemapper');
 
 modulemapper.clobbers('cordova/plugin/network', 'navigator.connection');

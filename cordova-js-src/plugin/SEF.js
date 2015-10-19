@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var SEF = {
    pluginName : ['TV', 'TVMW', 'NNavi', 'Audio', 'AppCommon', 'FrontPanel', 'ImageViewer', 'Player', 'AUI',
                      'Storage', 'Network', 'Download', 'Screen', 'Time', 'Video', 'Window',
