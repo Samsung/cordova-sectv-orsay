@@ -38,7 +38,7 @@ module.exports = {
         if(!appParams) {
             parseAppParams();
         }
-        if(appParams && typeof appParams.country === 'string' && appParams.lang.length > 0) {
+        if(appParams && typeof appParams.country === 'string' && appParams.country.length > 0) {
             success && setTimeout(function () {
                 success({
                     value: appParams.country
