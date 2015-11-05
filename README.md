@@ -1,5 +1,5 @@
 # cordova-sectv-orsay
-`cordova-sectv-orsay` is an TV application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
+`cordova-sectv-orsay` is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
 Cordova based applications are, at the core, applications written with web technology: HTML, CSS and JavaScript.
 
 # Supported Platform
@@ -18,43 +18,42 @@ Cordova based applications are, at the core, applications written with web techn
 ```
 
 # How to Build
-* Please see [Cordova-js](http://github.com/apache/cordova-js) for more detail.
-* Clone the [Cordova-js](http://github.com/apache/cordova-js) project as sibling of this project.
+This section describes the build process which creates `cordova.js` file for the `sectv-orsay` cordova platform.
+Please see [Cordova-js](http://github.com/apache/cordova-js) for more detail of `compile` task.
+1. Clone the [Cordova-js](http://github.com/apache/cordova-js) project as sibling of this project.
     ```
     ./
      |-cordova-js
      `-cordova-sectv-orsay
     ```
 
-* Add "sectv-orsay" as a target for `Gruntfile.js` in the cordova-js project.
+2. Add "sectv-orsay" as a target for `Gruntfile.js` in the cordova-js project.
     ```js
     ...
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         "compile": {
-            ...
-            "sectv-orsay": {},
-            "sectv-tizen": {}
+            ...,
+            "sectv-orsay": {}
         },
         "compile-browserify": {
         ...
     });
     ```
 
-* Add "sectv-orsay" property to "cordova-platforms" to the cordova-js project's `package.json` with path to this project as its value.
+3. Add "sectv-orsay" property to "cordova-platforms" to the cordova-js project's `package.json` with path to this project as its value.
     ```JSON
     "cordova-platforms": {
-      ...
-      "cordova-sectv-orsay": "../cordova-sectv-orsay",
-      "cordova-sectv-tizen": "../cordova-sectv-tizen"
+      ...,
+      "cordova-sectv-orsay": "../cordova-sectv-orsay"
     }
     ```
-* in the `cordova-js` directory's root:
+4. in the `cordova-js` directory's root:
     ```sh
     $ grunt compile:sectv-orsay
     ```
 
-* Above command will creates `cordova-js/pkg/cordova.sectv-orsay.js`. Let's copy the file to `www` directory which is including Orsay Application project template for further use. In the `cordova-js` directory:
+5. Above command will creates `cordova-js/pkg/cordova.sectv-orsay.js`. Let's copy the file to `www` directory which is including Orsay Application project template for further use. In the `cordova-js` directory:
     ```sh
     $ cp ./pkg/cordova.sectv-orsay.js ../cordova-sectv-orsay/www/cordova.js
     ```
