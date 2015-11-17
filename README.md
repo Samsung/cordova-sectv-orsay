@@ -70,3 +70,5 @@ For creating application package for Orsay TV:
 
 # Known Issues
 Not yet
+
+[![Analytics](https://ga-beacon.appspot.com/UA-70262254-1/cordova-sectv-tizen/README)](https://github.com/igrigorik/ga-beacon)
