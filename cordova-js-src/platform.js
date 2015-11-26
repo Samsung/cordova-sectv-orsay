@@ -29,7 +29,6 @@ module.exports = {
         var modulemapper = require('cordova/modulemapper');
         var channel = require('cordova/channel');
         var SEF = require('cordova/plugin/SEF');
-        require('cordova/plugin/ime-via-input');
         var isWebapisLoaded = false;
         var isOnShowEventFire = false;
 
