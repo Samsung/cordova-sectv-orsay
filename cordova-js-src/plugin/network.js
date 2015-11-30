@@ -45,7 +45,7 @@ function NetworkConnection() {
  * @param {Function} errorCallback The function to call when there is an error getting the Connection data. (OPTIONAL)
  */
 NetworkConnection.prototype.getInfo = function(successCallback, errorCallback) {
-    exec(successCallback, errorCallback, "NetworkStatus", "getConnectionInfo", []);
+    exec(successCallback, errorCallback, 'NetworkStatus', 'getConnectionInfo', []);
 };
 
 var me = new NetworkConnection();
@@ -58,19 +58,20 @@ channel.waitForInitialization('onCordovaConnectionReady');
 channel.onCordovaReady.subscribe(function() {
     me.getInfo(function(info) {
         me.type = info;
-        if (info === "none") {
+        if (info === 'none') {
             // set a timer if still offline at the end of timer send the offline event
-            timerId = setTimeout(function(){
-                cordova.fireDocumentEvent("offline");
+            timerId = setTimeout(function() {
+                cordova.fireDocumentEvent('offline');
                 timerId = null;
             }, timeout);
-        } else {
+        }
+        else {
             // If there is a current offline event pending clear it
             if (timerId !== null) {
                 clearTimeout(timerId);
                 timerId = null;
             }
-            cordova.fireDocumentEvent("online");
+            cordova.fireDocumentEvent('online');
         }
 
         // should only fire this once
@@ -84,7 +85,7 @@ channel.onCordovaReady.subscribe(function() {
         if (channel.onCordovaConnectionReady.state !== 2) {
             channel.onCordovaConnectionReady.fire();
         }
-        console.log("Error initializing Network Connection: " + e);
+        console.log('Error initializing Network Connection: ' + e);
     });
 });
 

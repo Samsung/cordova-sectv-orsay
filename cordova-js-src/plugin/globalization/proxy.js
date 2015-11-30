@@ -1,5 +1,5 @@
 var appParams;
-var GlobalizationError = require("cordova/plugin/GlobalizationError");
+var GlobalizationError = require('cordova/plugin/GlobalizationError');
 
 function parseAppParams() {
     // Example: ?country=US&samsung_country=US&language=1&lang=en&modelid=13_FOXP&server=development&remocon=2_35_259_12&area=USA&product=0&mgrver=5.014&totalMemory=1744830464&webbrowser=true&sourcetype=0&preload=true
@@ -53,4 +53,4 @@ module.exports = {
     }
 };
 
-require("cordova/exec/proxy").add("Globalization", module.exports);
+require('cordova/exec/proxy').add('Globalization', module.exports);

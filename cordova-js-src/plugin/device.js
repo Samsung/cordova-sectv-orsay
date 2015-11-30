@@ -26,6 +26,7 @@ var argscheck = require('cordova/argscheck'),
     cordova = require('cordova');
 
 channel.createSticky('onCordovaInfoReady');
+
 // Tell cordova channel to wait on the CordovaInfoReady event
 channel.waitForInitialization('onCordovaInfoReady');
 
@@ -60,7 +61,7 @@ function Device() {
             channel.onCordovaInfoReady.fire();
         },function(e) {
             me.available = false;
-            utils.alert("[ERROR] Error initializing Cordova: " + e);
+            utils.alert('[ERROR] Error initializing Cordova: ' + e);
         });
     });
 }
@@ -73,7 +74,7 @@ function Device() {
  */
 Device.prototype.getInfo = function(successCallback, errorCallback) {
     argscheck.checkArgs('fF', 'Device.getInfo', arguments);
-    exec(successCallback, errorCallback, "Device", "getDeviceInfo", []);
+    exec(successCallback, errorCallback, 'Device', 'getDeviceInfo', []);
 };
 
 module.exports = new Device();

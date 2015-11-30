@@ -29,19 +29,19 @@ module.exports = function(success, fail, service, action, args) {
     if (proxy) {
         var callbackId = service + cordova.callbackId++;
 
-        if (typeof success == "function" || typeof fail == "function") {
-            cordova.callbacks[callbackId] = {success:success, fail:fail};
+        if (typeof success == 'function' || typeof fail == 'function') {
+            cordova.callbacks[callbackId] = {success: success, fail: fail};
         }
 
         try {
             proxy(success, fail, args);
         }
         catch(e) {
-            var msg = "Exception calling :: " + service + " :: " + action  + " ::exception=" + e;
+            var msg = 'Exception calling :: ' + service + ' :: ' + action + ' ::exception=' + e;
             console.log(msg);
         }
     }
     else {
-        fail && fail("Missing Command Error");
+        fail && fail('Missing Command Error');
     }
 };

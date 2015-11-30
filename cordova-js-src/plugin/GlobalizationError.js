@@ -19,7 +19,6 @@
  *
 */
 
-
 /**
  * Globalization error object
  *

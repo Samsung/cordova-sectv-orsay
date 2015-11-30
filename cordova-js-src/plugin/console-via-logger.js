@@ -29,15 +29,15 @@
 // In the sectv-orsay and sectv-tizen, all the cordova plugin implementation is merged to cordova.js. This is done by cordova-js and plugin modules are merged with "/" separator instead of ".".
 // This makes error because the "require" searches the "." separator from the plugin module's id to make the absolute path.
 // To use absolute id will suppress this error.
-var logger = require("cordova/plugin/logger");
+var logger = require('cordova/plugin/logger');
 /* jshint -W098 */
-var utils  = require("cordova/utils");
+var utils = require('cordova/utils');
 
 //------------------------------------------------------------------------------
 // object that we're exporting
 //------------------------------------------------------------------------------
 /* jshint -W079 */
-var console = module.exports; 
+var console = module.exports;
 
 //------------------------------------------------------------------------------
 // copy of the original console object
@@ -63,11 +63,13 @@ function noop() {}
 // used for unimplemented methods
 //------------------------------------------------------------------------------
 console.useLogger = function (value) {
-    if (arguments.length) UseLogger = !!value;
+    if (arguments.length) {
+        UseLogger = !!value;
+    }
 
     if (UseLogger) {
         if (logger.useConsole()) {
-            throw new Error("console and logger are too intertwingly");
+            throw new Error('console and logger are too intertwingly');
         }
     }
 
@@ -76,40 +78,52 @@ console.useLogger = function (value) {
 
 //------------------------------------------------------------------------------
 console.log = function() {
-    if (logger.useConsole()) return;
+    if (logger.useConsole()) {
+        return;
+    }
     logger.log.apply(logger, [].slice.call(arguments));
 };
 
 //------------------------------------------------------------------------------
 console.error = function() {
-    if (logger.useConsole()) return;
+    if (logger.useConsole()) {
+        return;
+    }
     logger.error.apply(logger, [].slice.call(arguments));
 };
 
 //------------------------------------------------------------------------------
 console.warn = function() {
-    if (logger.useConsole()) return;
+    if (logger.useConsole()) {
+        return;
+    }
     logger.warn.apply(logger, [].slice.call(arguments));
 };
 
 //------------------------------------------------------------------------------
 console.info = function() {
-    if (logger.useConsole()) return;
+    if (logger.useConsole()) {
+        return;
+    }
     logger.info.apply(logger, [].slice.call(arguments));
 };
 
 //------------------------------------------------------------------------------
 console.debug = function() {
-    if (logger.useConsole()) return;
+    if (logger.useConsole()) {
+        return;
+    }
     logger.debug.apply(logger, [].slice.call(arguments));
 };
 
 //------------------------------------------------------------------------------
 console.assert = function(expression) {
-    if (expression) return;
+    if (expression) {
+        return;
+    }
 
     var message = logger.format.apply(logger.format, [].slice.call(arguments, 1));
-    console.log("ASSERT: " + message);
+    console.log('ASSERT: ' + message);
 };
 
 //------------------------------------------------------------------------------
@@ -117,7 +131,7 @@ console.clear = function() {};
 
 //------------------------------------------------------------------------------
 console.dir = function(object) {
-    console.log("%o", object);
+    console.log('%o', object);
 };
 
 //------------------------------------------------------------------------------
@@ -146,12 +160,12 @@ console.time = function(name) {
 console.timeEnd = function(name) {
     var timeStart = Timers[name];
     if (!timeStart) {
-        console.warn("unknown timer: " + name);
+        console.warn('unknown timer: ' + name);
         return;
     }
 
     var timeElapsed = new Date().valueOf() - timeStart;
-    console.log(name + ": " + timeElapsed + "ms");
+    console.log(name + ': ' + timeElapsed + 'ms');
 };
 
 //------------------------------------------------------------------------------
@@ -171,7 +185,7 @@ console.exception = console.log;
 
 //------------------------------------------------------------------------------
 console.table = function(data, columns) {
-    console.log("%o", data);
+    console.log('%o', data);
 };
 
 //------------------------------------------------------------------------------
@@ -180,8 +194,14 @@ console.table = function(data, columns) {
 function wrappedOrigCall(orgFunc, newFunc) {
     return function() {
         var args = [].slice.call(arguments);
-        try { orgFunc.apply(WinConsole, args); } catch (e) {}
-        try { newFunc.apply(console,    args); } catch (e) {}
+        try {
+            orgFunc.apply(WinConsole, args);
+        }
+        catch (e) {}
+        try {
+            newFunc.apply(console, args);
+        }
+        catch (e) {}
     };
 }
 
@@ -191,7 +211,7 @@ function wrappedOrigCall(orgFunc, newFunc) {
 // with one that calls both
 //------------------------------------------------------------------------------
 for (var key in console) {
-    if (typeof WinConsole[key] == "function") {
+    if (typeof WinConsole[key] == 'function') {
         console[key] = wrappedOrigCall(WinConsole[key], console[key]);
     }
 }

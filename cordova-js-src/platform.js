@@ -24,7 +24,7 @@ module.exports = {
     cordovaVersion: '3.4.0',
 
     bootstrap: function() {
-        console.log("cordova/platform: orsay bootstrap BEGIN");
+        console.log('cordova/platform: orsay bootstrap BEGIN');
 
         var modulemapper = require('cordova/modulemapper');
         var channel = require('cordova/channel');
@@ -35,7 +35,7 @@ module.exports = {
         modulemapper.clobbers('cordova/exec/proxy', 'cordova.commandProxy');
 
         var fireNativeReadyEvent = function() {
-            if(isWebapisLoaded && isOnShowEventFire){
+            if(isWebapisLoaded && isOnShowEventFire) {
                 channel.onNativeReady.fire();
             }
         };
@@ -67,12 +67,13 @@ module.exports = {
             channel.onResume.fire();
         };
         window.addEventListener('load', function () {
-            var AppCommonPlugin  = null;
+            var AppCommonPlugin = null;
             var NNaviPlugin = null;
             window.onShow = function () {
                 try {
                     AppCommonPlugin = SEF.get('AppCommon');
-                } catch(e){
+                }
+                catch(e) {
                     Error(e);
                 }
                 AppCommonPlugin.Execute('UnregisterAllKey');
@@ -85,7 +86,8 @@ module.exports = {
 
                 try {
                     NNaviPlugin = SEF.get('NNavi');
-                } catch(e){
+                }
+                catch(e) {
                     Error(e);
                 }
 
@@ -93,6 +95,7 @@ module.exports = {
                 isOnShowEventFire = true;
                 fireNativeReadyEvent();
             };
+
             if(window.curWidget && typeof window.curWidget.setPreference == 'function') {
                 window.curWidget.setPreference('ready', 'true');
             }
@@ -104,18 +107,18 @@ module.exports = {
 
         window.addEventListener('keydown', function (e) {
             switch(e.keyCode) {
-                case 88:  // RETURN key
+                case 88: // RETURN key
                     // default action disabled.
-                    // Calling "setPreference('return', 'true')" is needed explicitly to exit the application
+                    // Calling 'setPreference('return', 'true')' is needed explicitly to exit the application
                     e.preventDefault();
                     break;
-                case 45:  // EXIT key
+                case 45: // EXIT key
                     // NOTHING to prevent.
                     break;
             }
         });
 
-    // End of bootstrap
-        console.log("cordova/platform: orsay bootstrap END");
+        // End of bootstrap
+        console.log('cordova/platform: orsay bootstrap END');
     }
 };
