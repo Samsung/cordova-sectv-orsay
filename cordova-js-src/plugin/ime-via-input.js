@@ -29,7 +29,6 @@ document.body.addEventListener('focus', function (e) {
     }
 }, true);
 
-
 var imeInstance = null;
 function onFocus() {
     if(!bIMEJSInserted) {
@@ -41,7 +40,6 @@ function onFocus() {
     /*jshint camelcase: false */
     /*jshint undef: false */
     imeInstance = new IMEShell_Common();
-
 
     // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
     /*jshint camelcase: true */
@@ -75,13 +73,13 @@ function onKeyCallback(key, str, id) {
     var event = document.createEvent('Event');
 
     switch(key){
-        case 29443:
+        case 29443: // Orsay ENTER
             event.initEvent('submit', true, true);
             elInput.dispatchEvent(event);
             onBlur();
             break;
-        case 88:                
-        case 45:
+        case 88: // Orsay RETURN
+        case 45: // Orsay EXIT
             event.initEvent('cancel', true, true);
             elInput.dispatchEvent(event);
             onBlur();
