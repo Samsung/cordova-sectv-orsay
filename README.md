@@ -27,7 +27,7 @@ Please see [Cordova-js](http://github.com/apache/cordova-js) for more detail of 
     $ git clone https://github.com/apache/cordova-js.git
     ```
     
-    Repositories will be created like below structure.
+    Repositories will be created like below directory structure.
     ```
     ./
      |-cordova-js
@@ -70,8 +70,22 @@ Please see [Cordova-js](http://github.com/apache/cordova-js) for more detail of 
 For creating application package for Orsay TV:
 
 1. Copy your Cordova project's `www` directory which includes your application implementation to a new directory for the orsay project.
+
+    Assuming we've developed a Cordova project named as "MyProject" and it is located as a sibling of `cordova-sectv-orsay`.
+    ```
+    ./
+     |-cordova-js
+     |-cordova-sectv-orsay
+     `-MyProject
+       |- platforms
+       |- plugins
+       |- www
+       |  |- index.html
+       |  `- ...
+       `- config.xml
+    ```
+
     ```sh
-    # Assume we've developed a Cordova project named as "MyProject"
     $ cd MyProject
     $ cp -rf ./www ./orsayprj
     ```
