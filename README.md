@@ -71,7 +71,7 @@ For creating application package for Orsay TV:
 
 1. Copy your Cordova project's `www` directory which includes your application implementation to a new directory for the orsay project.
     ```sh
-    # Assume we developed a Cordova project named as "MyProject"
+    # Assume we've developed a Cordova project named as "MyProject"
     $ cd MyProject
     $ cp -rf ./www ./orsayprj
     ```
