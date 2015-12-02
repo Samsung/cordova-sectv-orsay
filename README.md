@@ -82,7 +82,8 @@ For creating application package for Orsay TV:
     $ cp ../cordova-js/pkg/cordova.sectv-orsay.js ./orsayprj/cordova.js
     ```
 
-4. Zip the project's `www` directory to package.
+4. Zip the orsay project directory to package.
+    $ zip -r MyProject_sectv-orsay.zip ./orsayprj
 
 * We recommand to use the [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) Grunt task to automate these process.
 
