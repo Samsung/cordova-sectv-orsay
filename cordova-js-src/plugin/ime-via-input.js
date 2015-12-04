@@ -17,7 +17,8 @@
 var focusFlag = true;
 var elInput = null;
 document.body.addEventListener('focus', function (e) {
-    if(document.activeElement && document.activeElement.tagName.toUpperCase() === 'INPUT' && (document.activeElement.type === 'text' || document.activeElement.type === 'password')) {
+    if(document.activeElement && document.activeElement.tagName.toUpperCase() === 'INPUT' &&
+        (document.activeElement.type === 'text' || document.activeElement.type === 'password')) {
         if(focusFlag) {
             elInput = document.activeElement;
             onFocus();
@@ -59,7 +60,7 @@ function onFocus() {
     imeInstance.setBlockSpace(true);
     imeInstance.onKeyPressFunc = onKeyCallback;
 
-    elInput.setAttribute('data-toast-ime-shown', 'true');
+    elInput.setAttribute('data-ime-show', 'true');
 
     imeInstance.onShow();
 }
@@ -91,7 +92,7 @@ function onBlur() {
     if(imeInstance) {
         imeInstance.onClose();
 
-        elInput.setAttribute('data-toast-ime-shown', 'false');
+        elInput.setAttribute('data-ime-show', 'false');
         elInput.blur();
 
         imeInstance = null;
