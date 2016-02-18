@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Samsung/cordova-sectv-orsay.svg?branch=master)](https://travis-ci.org/Samsung/cordova-sectv-orsay)
+
 # cordova-sectv-orsay
 `cordova-sectv-orsay` is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
 Cordova based applications are, at the core, applications written with web technology: HTML, CSS and JavaScript.
