@@ -23,7 +23,24 @@ var OrsayActiveConnectionType = {
 module.exports = {
     getConnectionInfo: function(successCallback, errorCallback) {
         var networkType = Connection.NONE;
+
         try {
+            var SEF = require('cordova/plugin/SEF');
+            var NetworkPlugin = SEF.get('Network');
+
+            NetworkPlugin.OnEvent = function(event, data1, data2) {
+                var networkEvent = document.createEvent('Event');
+                switch(data1) {
+                    case '0':
+                        networkEvent.initEvent('offline', true, true);
+                        window.dispatchEvent(networkEvent);
+                        break;
+                    case '1':
+                        networkEvent.initEvent('online', true, true);
+                        window.dispatchEvent(networkEvent);
+                        break;
+                }
+            };
             webapis.network.getAvailableNetworks(function(networkList) {
                 for( var i = 0; i < networkList.length; i++ ) {
                     if(networkList[i].isActive) {
