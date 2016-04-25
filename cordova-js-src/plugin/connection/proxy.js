@@ -43,24 +43,30 @@ module.exports = {
             };
             webapis.network.getAvailableNetworks(function(networkList) {
                 for( var i = 0; i < networkList.length; i++ ) {
-                    if(networkList[i].isActive) {
+                    if(networkList[i].isActive()) {
                         if(networkList[i].interfaceType == OrsayActiveConnectionType.WIFI) {
                             networkType = Connection.WIFI;
                         }
                         else if(networkList[i].interfaceType == OrsayActiveConnectionType.ETHERNET) {
                             networkType = Connection.ETHERNET;
                         }
-                        else {
-                            networkType = Connection.UNKNOWN;
-                        }
+                    }
+                    else {
+                        networkType = Connection.NONE;
                     }
                 }
                 setTimeout(function() {
+                    if(navigator.connection) {
+                        navigator.connection.type = networkType;
+                    }
                     successCallback(networkType);
                 },0);
             },function() {
                 networkType = Connection.NONE;
                 setTimeout(function() {
+                    if(navigator.connection) {
+                        navigator.connection.type = networkType;
+                    }
                     successCallback(networkType);
                 },0);
             });
