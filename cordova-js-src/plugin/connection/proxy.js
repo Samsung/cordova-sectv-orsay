@@ -15,9 +15,15 @@
  */
 
 var Connection = require('cordova/plugin/Connection');
+var SEF = require('cordova/plugin/SEF');
+var NetworkPlugin = SEF.get('Network');
 var OrsayActiveConnectionType = {
     WIFI: 0,
     ETHERNET: 1
+};
+var OrsayConnectionState = {
+    OFFLINE: '0',
+    ONLINE: '1'
 };
 
 module.exports = {
@@ -25,56 +31,68 @@ module.exports = {
         var networkType = Connection.NONE;
 
         try {
-            var SEF = require('cordova/plugin/SEF');
-            var NetworkPlugin = SEF.get('Network');
-
             NetworkPlugin.OnEvent = function(event, data1, data2) {
                 var networkEvent = document.createEvent('Event');
-                switch(data1) {
-                    case '0':
-                        networkEvent.initEvent('offline', true, true);
-                        window.dispatchEvent(networkEvent);
+
+                if(event == OrsayActiveConnectionType.WIFI || event == OrsayActiveConnectionType.ETHERNET) {
+                    checkNetworkType();
+                    switch(data1) {
+                    case OrsayConnectionState.OFFLINE:
+                        setTimeout(function() {
+                            if(!navigator.onLine) { // When network state changed in short time.
+                                networkEvent.initEvent('offline', true, true);
+                                window.dispatchEvent(networkEvent);
+                            }
+                        }, 0);
                         break;
-                    case '1':
-                        networkEvent.initEvent('online', true, true);
-                        window.dispatchEvent(networkEvent);
+                    case OrsayConnectionState.ONLINE:
+                        setTimeout(function() {
+                            if(navigator.onLine) { // When network state changed in short time.
+                                networkEvent.initEvent('online', true, true);
+                                window.dispatchEvent(networkEvent);
+                            }
+                        }, 0);
                         break;
+                    }
                 }
             };
-            webapis.network.getAvailableNetworks(function(networkList) {
-                for( var i = 0; i < networkList.length; i++ ) {
-                    if(networkList[i].isActive()) {
-                        if(networkList[i].interfaceType == OrsayActiveConnectionType.WIFI) {
-                            networkType = Connection.WIFI;
-                        }
-                        else if(networkList[i].interfaceType == OrsayActiveConnectionType.ETHERNET) {
-                            networkType = Connection.ETHERNET;
-                        }
-                    }
-                    else {
-                        networkType = Connection.NONE;
-                    }
-                }
-                setTimeout(function() {
-                    if(navigator.connection) {
-                        navigator.connection.type = networkType;
-                    }
-                    successCallback(networkType);
-                },0);
-            },function() {
-                networkType = Connection.NONE;
-                setTimeout(function() {
-                    if(navigator.connection) {
-                        navigator.connection.type = networkType;
-                    }
-                    successCallback(networkType);
-                },0);
-            });
+            checkNetworkType();
+
+            setTimeout(function() {
+                successCallback(networkType);
+            }, 0);
         }
         catch (e) {
             setTimeout(function() {
                 errorCallback(e);
-            },0);
+            }, 0);
+        }
+
+        function isActive(type) {
+            if( webapis._plugin('NETWORK', 'CheckDNS', type) == 1 && webapis._plugin('NETWORK', 'CheckGateway', type) == 1 && webapis._plugin('NETWORK', 'CheckHTTP', type) == 1 && webapis._plugin('NETWORK', 'CheckPhysicalConnection', type) == 1 ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function checkNetworkType() {
+            if(isActive(OrsayActiveConnectionType.ETHERNET)) {
+                console.log('connection network type is Ethernet');
+                networkType = Connection.ETHERNET;
+            }
+            else if(isActive(OrsayActiveConnectionType.WIFI)) {
+                console.log('connection network type is Wifi');
+                networkType = Connection.WIFI;
+            }
+            else {
+                console.log('network disconnected');
+                networkType = Connection.NONE;
+            }
+            if(navigator.connection) {
+                navigator.connection.type = networkType;
+            }
         }
     }
 };
