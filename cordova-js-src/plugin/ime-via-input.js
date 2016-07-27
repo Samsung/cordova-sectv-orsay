@@ -31,38 +31,45 @@ document.body.addEventListener('focus', function (e) {
 }, true);
 
 var imeInstance = null;
-function onFocus() {
+function onFocus(context) {
     if(!bIMEJSInserted) {
-        insertIMEJS(onFocus.bind(null));
+        insertIMEJS(this);
         return;
     }
 
     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
     /*jshint camelcase: false */
     /*jshint undef: false */
-    imeInstance = new IMEShell_Common();
+    if(imeInstance === null) {
+        imeInstance = new IMEShell_Common();
 
-    // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-    /*jshint camelcase: true */
-    elInput.id = elInput.id || ('ime_'+Date.now());
-    imeInstance.inputboxID = elInput.id;
-    var title = elInput.getAttribute('data-ime-title') || '';
-    imeInstance.inputTitle = title;
+        // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+        /*jshint camelcase: true */
+        elInput.id = elInput.id || ('ime_'+Date.now());
+        imeInstance.inputboxID = elInput.id;
+        var title = elInput.getAttribute('data-ime-title') || '';
+        imeInstance.inputTitle = title;
 
-    imeInstance.context = this;
-    if(elInput.type === 'password') {
-        imeInstance.setPasswordMode(false);
-        if(elInput.getAttribute('data-ime-show-password') === 'true') {
-            imeInstance.setUseShowHidePasswordMenu(true);
+        if(context) {
+            imeInstance.context = context;
         }
+        else {
+            imeInstance.context = this;
+        }
+
+        if(elInput.type === 'password') {
+            imeInstance.setPasswordMode(false);
+            if(elInput.getAttribute('data-ime-show-password') === 'true') {
+                imeInstance.setUseShowHidePasswordMenu(true);
+            }
+        }
+
+        imeInstance.setBlockSpace(true);
+        imeInstance.onKeyPressFunc = onKeyCallback;
+
+        elInput.setAttribute('data-ime-show', 'true');
+        imeInstance.onShow();
     }
-
-    imeInstance.setBlockSpace(true);
-    imeInstance.onKeyPressFunc = onKeyCallback;
-
-    elInput.setAttribute('data-ime-show', 'true');
-
-    imeInstance.onShow();
 }
 
 window.onHide = function () {
@@ -71,18 +78,18 @@ window.onHide = function () {
 
 /*jshint unused: false */
 function onKeyCallback(key, str, id) {
-    var event = document.createEvent('Event');
+    var e = document.createEvent('Event');
 
     switch(key){
         case 29443: // Orsay ENTER
-            event.initEvent('submit', true, true);
-            elInput.dispatchEvent(event);
+            e.initEvent('submit', true, true);
+            elInput.dispatchEvent(e);
             onBlur();
             break;
         case 88: // Orsay RETURN
         case 45: // Orsay EXIT
-            event.initEvent('cancel', true, true);
-            elInput.dispatchEvent(event);
+            e.initEvent('cancel', true, true);
+            elInput.dispatchEvent(e);
             onBlur();
             break;
     }
@@ -92,7 +99,7 @@ function onBlur() {
     if(imeInstance) {
         imeInstance.onClose();
 
-        elInput.setAttribute('data-ime-show', 'false');
+        elInput.setAttribute('data-toast-ime-shown', 'false');
         elInput.blur();
 
         imeInstance = null;
@@ -100,7 +107,7 @@ function onBlur() {
 }
 
 var bIMEJSInserted = false;
-function insertIMEJS(onLoad) {
+function insertIMEJS(context) {
     if(bIMEJSInserted) {
         return;
     }
@@ -118,7 +125,9 @@ function insertIMEJS(onLoad) {
         count++;
         if(count >= 2) {
             bIMEJSInserted = true;
-            onFocus && onFocus();
+            setTimeout(function() { //This timer is for 2012 year common IME UI rendering because Orsay platform performance.
+                onFocus && onFocus.call(this,context);
+            },2000);
         }
     }
 }
