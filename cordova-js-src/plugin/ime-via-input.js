@@ -99,7 +99,7 @@ function onBlur() {
     if(imeInstance) {
         imeInstance.onClose();
 
-        elInput.setAttribute('data-toast-ime-shown', 'false');
+        elInput.setAttribute('data-ime-show', 'false');
         elInput.blur();
 
         imeInstance = null;
