@@ -16,7 +16,6 @@
 
 var Connection = require('cordova/plugin/Connection');
 var SEF = require('cordova/plugin/SEF');
-var NetworkPlugin = SEF.get('Network');
 var OrsayActiveConnectionType = {
     WIFI: 0,
     ETHERNET: 1
@@ -29,6 +28,7 @@ var OrsayConnectionState = {
 module.exports = {
     getConnectionInfo: function(successCallback, errorCallback) {
         var networkType = Connection.NONE;
+        var NetworkPlugin = SEF.get('Network');
 
         try {
             NetworkPlugin.OnEvent = function(event, data1, data2) {
