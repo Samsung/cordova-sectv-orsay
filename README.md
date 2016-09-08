@@ -5,7 +5,7 @@
 Cordova based applications are, at the core, applications written with web technology: HTML, CSS and JavaScript.
 
 # Supported Platform
-* 2014's Samsung Smart TV
+* Legacy Samsung Smart TV (sectv-orsay)
 
 # Project Structure
 ```
